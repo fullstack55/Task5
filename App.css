@@ -1,0 +1,134 @@
+import React, { useState } from "react";
+import "./App.css";
+
+const ebooks = [
+  {
+    id: 1,
+    title: "JavaScript Essentials",
+    author: "Paul McFedries",
+    description: "Learn the fundamentals of JavaScript, the most popular programming language for web development.",
+    price: "$15.99",
+    image: "/Images/javascript-essentials.png",
+  },
+  {
+    id: 2,
+    title: "React in Action",
+    author: "Mark T.Thomas",
+    description: "A comprehensive guide to building modern web applications using React.",
+    price: "$25.99",
+    image: "/Images/react-in-action.png",
+  },
+  {
+    id: 3,
+    title: "Python for Data Science",
+    author: "Jake VanderPlas",
+    description: "Master Python and its applications in data analysis and machine learning.",
+    price: "$18.99",
+    image: "/Images/python-data-science.png",
+  },
+  {
+    id: 4,
+    title: "Machine Learning Basics",
+    author: "Alexander Jung",
+    description: "An introduction to the concepts and techniques of machine learning.",
+    price: "$22.50",
+    image: "/Images/ml-basics.png",
+  },
+  {
+    id: 5,
+    title: "Web Development with HTML & CSS",
+    author: "PREM KUMAR",
+    description: "Build stunning websites with this step-by-step guide to HTML and CSS.",
+    price: "$14.99",
+    image: "/Images/html-css.png",
+  },
+];
+
+function App() {
+  const [selectedEbook, setSelectedEbook] = useState(null);
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>E-books Library</h1>
+      </header>
+      <div className="container">
+        <div className="products">
+          <h2>E-books</h2>
+          {ebooks.map((ebook) => (
+            <button
+              key={ebook.id}
+              onClick={() => setSelectedEbook(ebook)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "10px",
+                padding: "10px",
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+                backgroundColor: selectedEbook?.id === ebook.id ? "#1976d2" : "#fff",
+                color: selectedEbook?.id === ebook.id ? "#fff" : "#000",
+                cursor: "pointer",
+                width: "350px",
+                height: "100px",
+                boxSizing: "border-box",
+              }}
+            >
+              <img
+                src={ebook.image}
+                alt={ebook.title}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  marginRight: "10px",
+                  borderRadius: "50%",
+                }}
+              />
+              <div>
+                <strong>{ebook.title}</strong>
+                <p>By {ebook.author}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+        <div className="details">
+          <h2>Details</h2>
+          {selectedEbook ? (
+            <>
+              <img
+                src={selectedEbook.image}
+                alt={selectedEbook.title}
+                style={{
+                  width: "400px",
+                  height: "300px",
+                  marginBottom: "20px",
+                }}
+              />
+              <h3>{selectedEbook.title}</h3>
+              <p><strong>Author:</strong> {selectedEbook.author}</p>
+              <p>{selectedEbook.description}</p>
+              <h4>Price: {selectedEbook.price}</h4>
+              <button
+                style={{
+                  padding: "10px 20px",
+                  backgroundColor: "#28a745",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Buy Now
+              </button>
+            </>
+          ) : (
+            <p>Select an e-book to view details.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
